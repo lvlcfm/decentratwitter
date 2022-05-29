@@ -39,4 +39,22 @@ describe("Decentratwitter", function () {
       expect(await decentratwitter.tokenURI(2)).to.equal(URI);
     });
   });
+  describe("Setting profiles", async () => {
+    it("Should allow users to select which NFT they own to represent their profile", async function () {
+      //user 1 mints another NFT
+      await decentratwitter.connect(user1).mint(URI);
+      // By default the users profile is set to their lsat minted NFT
+      expect(await decentratwitter.profiles(user1.address)).to.equal(2);
+      //user 1 sets profile to first minted nft
+      await decentratwitter.connect(user1).setProfile(1);
+      expect(await decentratwitter.profiles(user1.address)).to.equal(1);
+      // FAIL CASE //
+      // user 2 tries to set their profile to nft number 2 owned by user 1
+      await expect(
+        decentratwitter.connect(user2).setProfile(2),
+      ).to.be.revertedWith(
+        "Must own the nft you want to select as your profile",
+      );
+    });
+  });
 });
