@@ -83,4 +83,14 @@ contract Decentratwitter is ERC721URIStorage {
             // Trigger an event
             emit PostTipped(_id, _post.hash, _post.tipAmount, _post.author);
         }
+
+        // Fetches all the posts
+        function getAllPosts() external view returns (Post[] memory _posts) {
+
+        }
+
+        // Fetches all of the users nfts
+        function getMyNfts() external view returns (uint256[] memory _ids) {
+
+        }
 }
