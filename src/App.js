@@ -4,6 +4,7 @@ import { ethers } from "ethers";
 import DecentratwitterAbi from "./contractsData/decentratwitter.json";
 import DecentratwitterAddress from "./contractsData/decentratwitter-address.json";
 import { Spinner, Navbar, Nav, Button, Container } from "react-bootstrap";
+import Home from "./Home.js";
 import logo from "./logo.png";
 import "./App.css";
 
@@ -98,7 +99,13 @@ function App() {
               <p className="mx-3 my-0">Awaiting Metamask Connection...</p>
             </div>
           ) : (
-            <Routes></Routes>
+            <Routes>
+              <Route
+                path="/"
+                element={<Home contract={contract} account={account} />}
+              />
+              <Route path="/profile" />
+            </Routes>
           )}
         </div>
       </div>
